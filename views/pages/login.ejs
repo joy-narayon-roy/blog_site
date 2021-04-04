@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <%- include('../htmlModeul/allCssLink'); %>
+
+    <link rel="stylesheet" href="/CSS/Login.css" type="text/css" media="all" />
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+
+    <main class="container my-4">
+        <form action="/Login" method="post" class="card card-body formBody">
+            <!-- w3-light-gray -->
+            <%if (flashMessage.hasMessage) {
+                %>
+                <% if (flashMessage.fail) {
+                    %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= flashMessage.fail %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <% } %>
+                <% } %>
+            <div class="container">
+                <h2 class="text-center">Login</h2>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="email_Input">Enter your Email</label>
+                <input type="email" class="form-control <%- errors.email_Input?'is-invalid': '' %>" name="email_Input" id="email_Input" placeholder="Enter email" value="<%- value.email_Input?value.email_Input: '' %>" />
+                    <div class="invalid-feedback">
+                        <%- errors.email_Input?errors.email_Input.msg: '' %>
+                    </div>
+            </div>
+            
+            <div class="mt-3 form-group">
+                <label for="password_Input">Enter your Password:</label>
+                <input type="password" class="form-control <%- errors.password_Input?'is-invalid': '' %>" name="password_Input" id="password_Input" placeholder="Password" value="" />
+                
+                    <div class="invalid-feedback">
+                        <%- errors.password_Input?errors.password_Input.msg: '' %>
+                    </div>
+                </div>
+        
+            <button class="mt-3 btn btn-success" type="submit">Login</button>
+            <div class="mt-3">
+                <a class="btn btn-link" href="#">Creat account</a>
+                <br />
+                <a class="btn btn-link" href="#">Forget password </a>
+            </div>
+        </form>
+    </main>
+    <%- include('../htmlModeul/allJsLink'); %>
+</body>
+</html>

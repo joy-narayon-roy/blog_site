@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <%- include('../htmlModeul/allCssLink'); %>
+    <style type="text/css" media="all">
+        main {
+            height: auto;
+            width: 70%;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        main header h1{
+            font-weight: 900;
+            font-size: 4rem;
+        }
+        .form_body {
+            margin-top: 30px;
+        }
+        .log_butt {
+            height: auto;
+            width: auto;
+            justify-content: center;
+            border: 5px solid black;
+        }
+        li {
+            list-style-type: none;
+        }
+        .form-round{
+            border-radius: 50px;
+        }
+        .form-control,form .btn{
+            font-size: 1.6rem;
+        }
+        i{
+            font-size: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-primary text-white">
+    <%- include('../htmlModeul/nav'); %>
+    <main class="form-round bg-white text-dark p-5">
+        <header class="text-center ">
+            <i class="fa fa-user-plus w3-text-deep-orange"></i>
+            <h1>Signup</h1>
+        </header>
+
+        <form action="/Signup" class="form_body form-round" method="post" accept-charset="utf-8">
+            
+            <div class="form-group">
+                <label for="firstNameInput"><h2>First Name </h2></label>
+                <input type="text" name="firstNameInput" class="form-control <%- errors.firstNameInput ?'is-invalid': '' %>" id="firstNameInput" value="<%- value.firstNameInput?value.firstNameInput:'' %>" placeholder="Enter your first name" />
+                <div class="invalid-feedback">
+                    <%- errors.firstNameInput?errors.firstNameInput.msg:'' %>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastNameInput"><h2>Last Name :</h2></label>
+                <input type="text" name="lastNameInput" class="form-control <%-errors.lastNameInput?'is-invalid': '' %>" id="lastNameInput" value="<%- value.lastNameInput?value.lastNameInput:'' %>" placeholder="Enter your last name" />
+                <div class="invalid-feedback">
+                    <%- errors.lastNameInput?errors.lastNameInput.msg:'' %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumberInput"><h2>Phone :</h2></label>
+                <div class="input-group">
+                    <input type="number" name="phoneNumberInput" class="form-control <%- errors.phoneNumberInput ?'is-invalid': '' %> " id="phoneNumberInput" value="<%- value.phoneNumberInput?value.phoneNumberInput:'' %>" placeholder="Enter your last phone number" />
+                </div>
+                <div class="invalid-feedback">
+                    <%- errors.phoneNumberInput?errors.phoneNumberInput.msg:'' %>
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birthDay"><h2>Date of Birth :</h2></label>
+                <input type="date" class="form-control text-white <%= errors.birthDay?'is-invalid w3-deep-orange':'w3-pale-blue' %>" name="birthDay" id="birthDay" value="<%- value.birthDay?value.birthDay:'' %>" placeholder="date" />
+                <div class="invalid-feedback">
+                    <%- errors.birthDay?errors.birthDay.msg:'' %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="emailInput"><h2>Email : </h2></label>
+                <input type="email" name="emailInput" class="form-control <%- errors.emailInput?'is-invalid':''%>" id="emailInput" value="<%- value.emailInput?value.emailInput:'' %>" placeholder="Enter your e-mail" />
+                <div class="invalid-feedback">
+                    <%- errors.emailInput?errors.emailInput.msg:'' %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passwordInput"><h2>Password : </h2></label>
+                <input type="password" name="passwordInput" class="form-control <%= errors.passwordInput?'is-invalid':'' %>" id="passwordInput" value="" placeholder="Enter your Password" />
+                <div class="invalid-feedback">
+                    <%- errors.passwordInput?errors.passwordInput.msg:'' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPasswordInput"><h2>Conform Password : </h2></label>
+                <input type="password" name="confirmPasswordInput" class="form-control" id="confirmPasswordInput" value="" placeholder="Enter your Password" />
+            </div>
+            <div class="mt-5">
+                <button class="px-5 d-block m-auto btn btn-success disable">Signup</button>
+            </div>
+        </form>
+        <section class="mt-5">
+            <ul class="text-primary">
+                <li><a href="#">Forget Password ?</a></li>
+                <li><a href="/Login">Have account. Logoin</a></li>
+            </ul>
+        </section>
+    </main>
+
+
+    <%- include('../htmlModeul/allJsLink'); %>
+</body>
+</html>

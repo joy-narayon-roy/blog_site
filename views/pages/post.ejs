@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../htmlModeul/allCssLink'); %>
+
+    <title>Posts</title>
+
+    <link rel="stylesheet" href="/CSS/nav.css" type="text/css" media="all" />
+    <style>
+        .postCard {
+            height: auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+    <main class="pb-4">
+        <section class="card card-group">
+            <h1 class="card-text text-center my-3">My Posts</h1>
+            <hr/>
+            <% if (posts.length != 0) {
+                %>
+                <% for (let post of posts) {
+                    %>
+                    <div class="mt-3 mx-auto card postCard">
+                        <img class="card-img-top d-block" src="/<%- post.thumbImg %>" />
+                        <div class="card-body">
+                            <h4 class="card-title"><%- post.postTittle %></h4>
+                            <a href="/Post/Editpost/<%- post._id %>" class="px-4 btn btn-outline-primary">Edit</a>
+                        </div>
+                    </div>
+
+                    <%
+                } %>
+                <%
+            } else {
+                %>
+                <div class="container pb-4">
+                    <h4 class="text-center">
+                        No Post Found !
+                    </h4>
+                    <a href="/Post/Createpost" class="px-4 btn btn-primary">Creat Post</a>
+                </div>
+                <%
+            } %>
+        </section>
+    </main>
+</body>
+    <%- include('../htmlModeul/allJsLink'); %>
+</html>

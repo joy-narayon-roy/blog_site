@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+     <%- include('../htmlModeul/allCssLink'); %>
+</head>
+<body>
+    <header class="header">
+         <%- include('../htmlModeul/navbar'); %>
+    </header>
+    <main>
+        <section class="container mt-4">
+            <legend>Search for ' <%- terms %>'</legend>
+            <hr>
+
+            <% if (posts.length == 0) {
+                %>
+                <h4 class="text-muted text-center">No post found!</h4>
+                <%
+            } else {
+                %>
+
+                <% for (let post of posts) {
+                    %>
+                    
+                    <div class="mb-4 card card-body">
+                        <% if (post.thumbImg) {
+                            %>
+                            <img src="/<%- post.thumbImg%>" width="100%" height="300px" alt="" class="img-fluid mb-3">
+                            <%
+                        } %>
+                        <a href="/Post/<%- post._id %>" style="color:#222">
+                            <h5> <%- post.postTittle %></h5>
+                            <p class="mb-3">
+                                 <%- truncate(post.postBody) %>
+                            </p>
+                        </a>
+                        <div class="d-flex">
+                            <small class="text-muted">
+                                 <%- moment(post.createdAt) %> .
+                                 <%- post.user.fullName %>
+                            </small>
+
+                            <% if (user) {
+                                %>
+                                <span class="ml-auto bookmark" data-post=" <%- post._id %>">
+
+                                    <% if (bookmarks.includes(post._id)) {
+                                        %>
+                                        <i class="fas fa-bookmark"></i>
+                                        <%
+                                    } else {
+                                        %>
+                                        <i class="far fa-bookmark"></i>
+                                        <%
+                                    } %>
+                                </span>
+                                <%
+                            } %>
+
+                        </div>
+                    </div>
+                    <%
+                } %>
+
+                <div class="pagination">
+                    <nav aria-label="" class="mx-auto">
+                        <ul class="pagination">
+                            <li class="page-item <%- currentPage == 1?'disabled': '' %>">
+                                <a class="page-link" href="/search?page= <%- currentPage-1 %>&filter= <%- filter %>">&laquo;</a>
+                            </li>
+
+                            <% for (let num = 1; num <= totalPages; num++) {
+                                %>
+                                <li class="page-item <%- num == currentPage?'active': '' %>">
+                                    <a class="page-link" href="/search?page= <%- num %>&filter= <%- filter %>"> <%- num %></a>
+                                </li>
+                                <%
+                            } %>
+                            <li class="page-item <%- currentPage == totalPages?'disabled':'' %>">
+                                <a class="page-link" href="/search?page= <%- currentPage+1 %>&filter= <%- filter %>">&raquo;</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <%
+            } %>
+
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+
+     <%- include('../htmlModeul/allJsLink'); %>
+
+    <script src="/Scripts/explore.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

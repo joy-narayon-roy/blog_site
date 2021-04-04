@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="/CSS/" type="text/css" media="all" />
+    <title>Creat a post</title>
+</head>
+<body class="w3-blue">
+    <header class="header">
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+    <main class="d-block mt-4 px-4">
+        <form action="/Post/Editpost/<%- data.id %>" enctype="multipart/form-data" class="bg-white card card-body text-dark px-3 py-4 rounded" method="post" accept-charset="utf-8">
+            
+            <h2 class="text-center pb-5">Creat post</h2>
+            <div class="form-group">
+                <label for="postTittle"><strong>Your Post Title : </strong></label>
+                <input class="form-control <%- errors.postTittle?'is-invalid': '' %>" type="text" name="postTittle" id="postTittle" placeholder="Enter your post title" value="<%- data.postTittle?data.postTittle:'' %>" />
+                <div class="invalid-feedback">
+                     <%- errors.postTittle?errors.postTittle.msg: '' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="postBody"><strong>Write what are you thinking</strong></label>
+                <textarea name="postBody" id="postBody" class="form-control <%- errors.postBody?'is-invalid': '' %>" placeholder="Write..." rows="20" cols=""><%- data.postBody?data.postBody:'' %></textarea>
+                <div class="invalid-feedback">
+                     <%- errors.postBody?errors.postBody.msg: '' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="postTages"><strong>Tag's (Max:10)</strong></label>
+                <input type="text" class="form-control <%- errors.postTages?'is-invalid': '' %>" name="postTages" id="postTages" placeholder="ex , ex , ex..." value="<%- data.postTages?data.postTages.toString():'' %>" />
+                <div class="invalid-feedback">
+                     <%- errors.postTages?errors.postTages.msg: '' %>
+                </div>
+            </div>
+            
+            <% if(data.thumbImg){ %>
+            <div class="">
+                <img src="../../<%- data.thumbImg?data.thumbImg:'' %>" class="img-fluid" alt="Responsive image">
+            </div>
+            <% } %>
+
+            <div class="custom-file">
+                <input type="file" name="thumbImg" class="custom-file-input" id="thumbImg">
+                <label class="custom-file-label" for="thumbImg">Choose file</label>
+            </div>
+            
+            <div class="mt-4 d-flex justify-content-around">
+            <button class="btn btn-success" type="submit">Save</button>
+            <a href="/Post/Deletepost/<%- data.id %>" class="btn btn-danger">Delete</a>
+            </div>
+        </form>
+    </main>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/6xaozzb3r5bu7y8z4g8hchg3ilije54gtilftbfg9a7w9u1o/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+        $(".custom-file-input").on("change", function() {
+            var thumbImg = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(thumbImg);
+        });
+    </script>
+    <script src="/Scripts/post.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

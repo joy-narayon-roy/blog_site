@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand pl-5 d-block" href="#"><h1 class="text-center">NJO</h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/explore" >Explore</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Profile">Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Post
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                    <a class="dropdown-item" href="/Post">All post</a>
+
+                    <a class="dropdown-item" href="/Post/Createpost">Creat a Post</a>
+                </div>
+            </li>
+            <% if (isLoggedIn) {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Logout">Logout</a>
+                </li>
+                <%
+            } else {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Signup">Signup</a>
+                </li>
+                <%
+            } %>
+        </ul>
+        <form action="/search?" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" name="terms" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

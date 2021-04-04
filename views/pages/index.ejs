@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <%- include('../htmlModeul/allCssLink'); %>
+
+    <link rel="stylesheet" href="/CSS/Login.css" type="text/css" media="all" />
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+
+    <main class="container">
+        <%if (flashMessage.hasMessage) {
+            %>
+            <% if (flashMessage.fail) {
+                %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%= flashMessage.fail %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <%
+            } %>
+            <%
+        } %>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h3>My posts</h3>
+    <% for(let post of posts){ %>
+    <div class="mb-4 card card-body">
+        <% if(post.thumbImg){ %>
+        <img src="/<%-post.thumbImg%>" width="100%" height="300px" alt="" class="img-fluid mb-3">
+        <% } %>
+        <a href="/Post/<%- post._id %>" style="color:#222">
+            <h5><%- post.postTittle %></h5>
+            <p class="mb-3">
+                <%- post.postBody %>
+            </p>
+        </a>
+        <div class="d-flex">
+            <small class="text-muted">
+                <%- moment(post.createdAt) %> . 
+                <%- post %>
+            </small>
+            
+            <% if(user){ %>
+            <span class="ml-auto bookmark" data-post="<%- post._id %>">
+                
+                <% if(bookmarks.includes(post._id)){ %>
+                <i class="fas fa-bookmark"></i>
+                <% } else { %>
+                <i class="far fa-bookmark"></i>
+                <% } %>
+            </span>
+            <% } %>
+        </div>
+    </div>
+    <% } %>
+            </div>
+            <div class="col-md-8">
+                <h3>My bookmarks</h3>
+    <% for(let post of bookmarks){ %>
+    <div class="mb-4 card card-body">
+        <% if(post.thumbImg){ %>
+        <img src="/<%-post.thumbImg%>" width="100%" height="300px" alt="" class="img-fluid mb-3">
+        <% } %>
+        <a href="/Post/<%- post._id %>" style="color:#222">
+            <h5><%- post.postTittle %></h5>
+            <p class="mb-3">
+                <%- post.postBody %>
+            </p>
+        </a>
+        <div class="d-flex">
+            <small class="text-muted">
+                <%- moment(post.createdAt) %> . 
+                <%- post.user %>
+            </small>
+            
+            <% if(user){ %>
+            <span class="ml-auto bookmark" data-post="<%- post._id %>">
+                
+                <% if(bookmarks.includes(post._id)){ %>
+                <i class="fas fa-bookmark"></i>
+                <% } else { %>
+                <i class="far fa-bookmark"></i>
+                <% } %>
+            </span>
+            <% } %>
+        </div>
+    </div>
+    <% } %>
+            </div>
+        </div>
+    </main>
+    <%- include('../htmlModeul/allJsLink'); %>
+</body>
+</html>

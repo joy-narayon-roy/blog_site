@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../htmlModeul/allCssLink'); %>
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="/CSS/main.css" type="text/css" media="all" />
+</head>
+<body class="bg-primary">
+    <!--Star Here-->
+    <header class="header">
+        <%- include('../htmlModeul/navbar') %>
+    </header>
+    <main class="main border bg-white p-3">
+        <section class="image_section m-0 pb-3">
+            <div class="m-0 p-0">
+                <% if(profile.profilePic){ %>
+                <img height="200px" width="200px" class="d-block ml-1 img-thumbnail" src="../<%- profile.profilePic%>" />
+                <% }else{ %>
+                <img height="200px" width="200px" class="d-block ml-1 img-thumbnail" src="../uploads/default.png" />
+                <% } %>
+                
+            </div>
+            <form action="/Profile/Photo" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                <input type="file" name="picture"  class="form-control mt-2" id="picture" value="" />
+                <button class="btn btn-success mt-2" type="submit">Upload Picture</button>
+            </form>
+            </section>
+        <form action="/Profile/Editprofile" method="post" class="" accept-charset="utf-8">
+        <section class="">
+            <div class="list-group">
+                <h4 class="list-group-item"><strong><i style="font-size:1.5rem" class="fas fa-user"></i> General Information</strong></h4>
+                <h4 class="list-group-item">Name : <input type="text" class="form-control" name="name" id="name" value="<%- profile.name %>" /></h4>
+                <h4 class="list-group-item">Phone : <input type="number" class="form-control" name="phone" id="phone" value="<%- profile.phone %>" /></h4>
+                <h4 class="list-group-item">Email : <input type="email" class="form-control" name="email" id="email" value="<%- profile.email %>" /></h4>
+                <h4 class="list-group-item">Country : <input type="text" class="form-control" name="country" id="email" value="<%- profile.country %>" /></h4>
+            </div>
+        </section>
+            
+        <section class="">
+            <ul class="list-group">
+                <li class="list-group-item"><h4 class=""><strong><i class="fas fa-link"></i>  My Links </strong></h4></li>
+                <li class="list-group-item"><i class="fab fa-facebook-f" style="font-size:1.5rem;color:#30a1fa;"></i><strong> Facebook Link : <input type="url" class="form-control" name="fburl" id="fburl" value="<%- profile.fburl %>" /></strong></li>
+                <li class="list-group-item"><i style="font-size:1.5rem" class="fab fa-github"></i><strong> Github link : <input type="url" name="githuburl" class="form-control" id="githuburl" value="<%- profile.githuburl %>" /></strong></li>
+                <li class="list-group-item"><i style="font-size:1.5rem" class="fa fa-globe"></i> <strong>Website : <input type="url" name="siteurl" class="form-control" id="siteurl" value="<%- profile.siteurl %>" /></strong></li>
+            </ul>
+        </section>
+        <button class="btn btn-success mt-3" type="submit">Save</button>
+        <a href="/Profile" class="btn btn-primary float-right mt-3">Cancel</a>
+        </form>
+    </main>
+    <footer class="footer" style="display:none">
+    </footer>
+    <!--End Here-->
+
+</body>
+</html>

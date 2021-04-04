@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <%- include('../htmlModeul/allCssLink'); %>
+    <style type="text/css" media="all">
+        main {
+            height: auto;
+            width: 60%;
+            margin: 100px auto;
+
+            box-sizing: border-box;
+        }
+        .form_body {
+            margin-top: 30px;
+        }
+        .log_butt {
+            height: auto;
+            width: auto;
+            justify-content: center;
+            border: 5px solid black;
+        }
+        li {
+            list-style-type: none;
+        }
+
+    </style>
+</head>
+<body class="bg-primary text-white">
+    <%- include('../htmlModeul/nav'); %>
+
+    <main class="rounded p-5">
+        <header class="text-center ">
+            <h1>Login</h1>
+        </header>
+
+        <form action="" class="form_body" method="post" accept-charset="utf-8">
+            <%if(error){%>
+                <div class="alert alert-danger text-center" role="alert">
+                    Wrong information !
+                </div>
+            <% } %>
+            <div class="form-group">
+                <label for="email_Input"><h3>Email : </h3></label>
+                <input type="email" name="email_Input" class="form-control" id="email_Input" value="" placeholder="Enter your e-mail" />
+            </div>
+            <div class="form-group">
+                <label for="password_Input"><h3>Password : </h3></label>
+                <input type="password" name="password_Input" class="form-control" id="password_Input" value="" placeholder="Enter your Password" />
+            </div>
+            <div class="mt-5">
+                <button class="px-5 d-block m-auto btn btn-outline-primary">Login</button>
+            </div>
+        </form>
+        <section class="mt-5">
+            <ul class="text-primary">
+                <li><a href="#">Forget Password ?</a></li>
+                <li><a href="/Signup">Creat account</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script type="text/javascript" charset="utf-8">
+        var x = document.getElementById('password_Input').value
+        //alert(x)
+    </script>
+
+    <%- include('../htmlModeul/allJsLink'); %>
+    <%- include('../htmlModeul/htmlEnd'); %>

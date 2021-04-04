@@ -1,0 +1,45 @@
+body {
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 950px) {
+    .header {
+        width: 100%;
+    }
+    .main {
+        height: auto;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+
+.header,.main,.footer {
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+}
+.footer {
+    padding: 10px;
+    background-color: #9fa2a3;
+    color: #fff;
+}
+.bd {
+    border: 2px solid black;
+}

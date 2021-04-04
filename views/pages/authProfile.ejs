@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <%- include('../htmlModeul/allCssLink'); %>
+
+    <link rel="stylesheet" href="/CSS/main.css" type="text/css" media="all" />
+</head>
+<body class="bg-primary text-dark">
+    <!--Star Here-->
+    <header class="header">
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+    <main class="main border bg-white rounded px-3 py-4">
+        <section class="image_section m-0 pb-3">
+            <div class="m-0 p-0">
+                <% if (profile.profilePic){%>
+                <img height="200px" width="200px" class="d-block m-auto img-thumbnail" src="../<%- profile.profilePic %>" />
+                <% }else{%>
+                <img height="200px" width="200px" class="d-block m-auto img-thumbnail" src="../uploads/default.png" />
+                <% }%>
+            </div>
+            <div>
+                <h1 style="font-weight:600" class="text-center m-0 p-0"><%- profile.name?profile.name:'Set Your Name' %></h1>
+            </div>
+            <div class="">
+                <span style="width:40%;font-weight:100;font-size:0.7rem;display: block;margin: 0 auto" class=" text-center"><%- profile.country %></span>
+            </div>
+        </section>
+        <section class="card card-body">
+            <div class="">
+                <p>Name : <strong><%- profile.name %></strong></p>
+                <p>Phone : <strong><%- profile.phone %></strong></p>
+                <p>Email : <a href="mailto:<%- profile.email %>" target="_blank">
+                <strong><%- profile.email %></strong></p>
+                </a>
+            </div>
+            <div style="width:50%;font-size:2rem" class="d-flex justify-content-around">
+                <a href="<%- profile.fburl %>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="<%- profile.githuburl %>" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="<%- profile.siteurl %>" target="_blank"><i class="fas fa-globe"></i></a>
+            </div>
+        </section>
+        <hr size="50px">
+            <h1 class="text-center py-3 bg-light">All Posts</h1>
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <% for(let post of profile.post){ %>
+                    
+                    <a href="/post/<%- post._id %>">
+                    <div class="col mt-3">
+                        <div class="card card-body">
+                            <img src="/<%- post.thumbImg %>" alt="" class="img-fluid img-thumbnail">
+                            <h4>
+                            <%- post.postTittle %>
+                            </h4>
+                        </div>
+                    </div>
+                    </a>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!--End Here-->
+    <%- include('../htmlModeul/allJsLink'); %>
+</body>
+</html>

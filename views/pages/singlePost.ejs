@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <%- include('../htmlModeul/allCssLink'); %>
+</head>
+<body class="">
+    <header class="header">
+        <%- include('../htmlModeul/navbar'); %>
+    </header>
+
+    <main class="">
+        <a href="/Profile/<%-  postUser._id%>">
+            <section class="px-3 d-flex aboutPost">
+                <img height="100px" width="100px" src="/<%- postUser.profilePic %>"></img>
+            <div class="mt-2">
+                <h2><strong><%- postUser.name %></strong></h2>
+                <small class="text-muted">
+                    <%- moment(post.createdAt) %>
+                </small>
+            </div>
+        </section>
+    </a>
+
+    <hr />
+
+    <section class="post container">
+        <div class="">
+            <img class="img-fluid d-block mx-auto" src="/<%- post.thumbImg%>" alt="" />
+            <h3 class=""><%- post.postTittle %></h3>
+            <article>
+                <%- post.postBody %>
+            </article>
+            <% for (let tag of post.postTages) {
+                %>
+                <strong># <%- tag %>,</strong>
+                <%
+            } %>
+        </div>
+        <section>
+            <div class="mt-3">
+                <button id="likeBtn" class="btn btn-success" type="button" data-post="<%- post._id %>">
+                    <%- liked?'Liked': 'Like' %>(<%- post.like.length %>)
+                </button>
+                <button id="dislikeBtn" class="btn btn-danger" type="button" data-post="<%- post._id %>"><%- disliked?'Disliked': 'Dislike' %>(<%- post.dislike.length %>)</button>
+
+                <% if (user) {
+                    %>
+                    <span class="float-right pr-4 bookmark" data-post="<%- post._id %>">
+
+                        <% if (postUser.bookmarks.includes(post._id)) {
+                            %>
+                            <i class="fas fa-bookmark"></i>
+                            <%
+                        } else {
+                            %>
+                            <i class="far fa-bookmark"></i>
+                            <%
+                        } %>
+                    </span>
+                    <%
+                } %>
+
+
+            </div>
+            <div class="mt-2 comment" data-post="<%- post._id %>">
+                <label for=""><strong>Creat a Comment :-</strong></label>
+                <input type="text" class="form-control" data-post="<%- post._id %>" name="creatComment" id="creatComment" placeholder="Press Enter to Submit" value="" />
+            </div>
+
+            <h5>All comments :-</h5>
+            <div id="allComments">
+                <% if (post.comments.length == 0) {
+                    %>
+                    <p class="text-muted text-center">
+                        No Comments found !
+                    </p>
+                    <%
+                } else {
+                    %>
+                    <% for (let comment of post.comments.reverse()) {
+                        %>
+                        <div class="media border">
+                            <a href="/profile/<%- comment.profile._id %>" style="color:#222">
+                                <img src="/<%- comment.profile.profilePic %>" class="rounded-circle m-3" style="width:40px" />
+                            </a>
+
+                            <div class="media-body my-4">
+                                <strong><%- comment.profile.name %></strong>
+                                <span><small class="text-muted"><%- moment(comment.createdAt) %></small></span>
+                                <p>
+                                    <%- comment.body %>
+                                </p>
+
+                                <div class="ml-2 creatReply">
+                                    <label for="creatReply"><strong>Creat Replay</strong></label>
+                                    <input class="form-control" type="text" name="creatReply" id="creatReply" placeholder="Press Enter to Submit" value="" data-comment="<%- comment._id %>" />
+                                </div>
+
+                                <div id="allReplies-<%- comment._id %>" class="ml-2">
+                                    <% for (let reply of comment.replies.reverse()) {
+                                        %>
+                                        <div class="media border">
+                                            <a href="/profile/<%- reply.profile?reply.profile._id:'' %>">
+                                            <img src="/<%- reply.profile?reply.profile.profilePic: '' %>" class="rounded-circle m-3" style="width:30px" />
+                                            </a>
+
+                                            <div class="media-body my-2">
+                                                <a href="/profile/<%- reply.profile?reply.profile._id:'' %>">
+                                                </a>             <strong><%- reply.profile?reply.profile.name: '' %></strong>
+
+                                                <small><%- moment(reply.createdAt) %></small>
+                                                <p>
+                                                    <%- reply.body %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <%
+                                    } %>
+                                </div>
+                            </div>
+
+                        </div>
+                        <%
+                    } %>
+                    <%
+                } %>
+            </div>
+
+        </section>
+    </section>
+</main>
+
+<%- include('../htmlModeul/allJsLink'); %>
+
+<script src="/Scripts/like_dislike.js" type="text/javascript" charset="utf-8"></script>
+<script src="/Scripts/comments.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
